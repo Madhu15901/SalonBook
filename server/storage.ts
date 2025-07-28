@@ -30,6 +30,7 @@ export class MemStorage implements IStorage {
       id,
       status: "pending",
       createdAt: new Date(),
+      notes: insertAppointment.notes || null,
     };
     this.appointments.set(id, appointment);
     return appointment;
@@ -60,6 +61,8 @@ export class MemStorage implements IStorage {
       id,
       status: "new",
       createdAt: new Date(),
+      phone: insertInquiry.phone || null,
+      serviceInterest: insertInquiry.serviceInterest || null,
     };
     this.contactInquiries.set(id, inquiry);
     return inquiry;

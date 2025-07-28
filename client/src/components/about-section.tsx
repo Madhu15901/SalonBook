@@ -7,7 +7,7 @@ export default function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground">About Luxura Salon</h2>
+              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-foreground">About <span className="font-script">Luxura</span> Salon</h2>
               <p className="text-xl text-foreground/80 leading-relaxed">
                 With over 15 years of experience in the beauty industry, Luxura Salon has established itself as a premier destination for luxury beauty treatments and personalized care.
               </p>

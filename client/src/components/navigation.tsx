@@ -22,7 +22,7 @@ export default function Navigation({ onBookNow }: NavigationProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <div className="text-2xl font-serif font-bold text-primary">Luxura</div>
+            <div className="text-3xl font-script font-bold text-primary">Luxura</div>
           </div>
           
           <div className="hidden md:block">

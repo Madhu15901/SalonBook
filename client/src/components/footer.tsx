@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <div className="text-3xl font-serif font-bold text-primary">Luxura</div>
+            <div className="text-4xl font-script font-bold text-primary">Luxura</div>
             <p className="text-white/70 leading-relaxed">
               Your premier destination for luxury beauty treatments and personalized care in the heart of the city.
             </p>

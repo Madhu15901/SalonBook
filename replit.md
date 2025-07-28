@@ -1,8 +1,8 @@
-# Luxura Salon Application
+# King Professional Salon Application
 
 ## Overview
 
-This is a modern full-stack web application for a luxury beauty salon called "Luxura Salon". The application provides a sophisticated online presence with appointment booking, contact inquiries, service showcases, and customer testimonials. Built with React/TypeScript frontend and Express.js backend, it offers a seamless user experience for both customers and salon management.
+This is a modern full-stack web application for a luxury beauty salon called "King Professional Salon". The application provides a sophisticated online presence with appointment booking, contact inquiries, service showcases, and customer testimonials. Built with React/TypeScript frontend and Express.js backend, it offers a seamless user experience for both customers and salon management.
 
 ## User Preferences
 

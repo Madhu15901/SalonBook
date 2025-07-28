@@ -100,7 +100,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-foreground mb-2">Email Us</h3>
-                  <p className="text-foreground/70">hello@luxurasalon.com</p>
+                  <p className="text-foreground/70">hello@kingprofessional.com</p>
                   <p className="text-sm text-foreground/60">We'll respond within 24 hours</p>
                 </div>
               </div>

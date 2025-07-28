@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <div className="text-4xl font-script font-bold text-primary">Luxura</div>
+            <div className="text-3xl font-script font-bold text-primary">King Professional</div>
             <p className="text-white/70 leading-relaxed">
               Your premier destination for luxury beauty treatments and personalized care in the heart of the city.
             </p>
@@ -109,7 +109,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary" />
-                <span>hello@luxurasalon.com</span>
+                <span>hello@kingprofessional.com</span>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 mt-12 pt-8 text-center">
           <p className="text-white/60">
-            © 2024 Luxura Salon. All rights reserved. | 
+            © 2024 King Professional Salon. All rights reserved. | 
             <a href="#" className="hover:text-primary transition-colors ml-1">Privacy Policy</a> | 
             <a href="#" className="hover:text-primary transition-colors ml-1">Terms of Service</a>
           </p>

@@ -23,8 +23,15 @@ The application follows a modern full-stack architecture with clear separation b
 - **Runtime**: Node.js with Express.js framework
 - **Language**: TypeScript with ES modules
 - **API Design**: RESTful API with JSON responses
+- **Email Service**: Nodemailer with SMTP integration for transactional emails
 - **Error Handling**: Centralized error handling middleware
 - **Development**: Hot reloading with Vite integration in development mode
+
+### Email Service
+- **Service**: Nodemailer configured with SMTP
+- **Configuration**: Uses environment variables (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, SMTP_FROM_EMAIL)
+- **Email Module**: `server/email.ts` handles all email sending logic
+- **Sends**: Appointment confirmations, contact inquiry acknowledgements, and salon notifications
 
 ## Key Components
 
@@ -42,11 +49,11 @@ The application follows a modern full-stack architecture with clear separation b
 - **Design**: Ready for database integration with minimal changes
 
 ### API Endpoints
-- `POST /api/appointments` - Create new appointment
+- `POST /api/appointments` - Create new appointment (sends confirmation emails)
 - `GET /api/appointments` - Retrieve all appointments
 - `GET /api/appointments/:id` - Get specific appointment
 - `PATCH /api/appointments/:id/status` - Update appointment status
-- `POST /api/contact` - Submit contact inquiry
+- `POST /api/contact` - Submit contact inquiry (sends confirmation emails)
 - `GET /api/contact` - Retrieve contact inquiries
 
 ### UI Components Structure
@@ -65,8 +72,13 @@ The application follows a modern full-stack architecture with clear separation b
 2. **Form Submission**: Forms are validated using Zod schemas
 3. **API Requests**: TanStack Query manages API calls to Express endpoints
 4. **Data Processing**: Express routes handle business logic and validation
-5. **Storage Operations**: Data is persisted through the storage interface
-6. **Response Handling**: Success/error states are managed and displayed to users
+5. **Email Notifications**: Automated emails sent via Nodemailer/SMTP:
+   - Appointment confirmations to customers
+   - Appointment notifications to salon
+   - Contact inquiry confirmations to customers
+   - Contact inquiry notifications to salon
+6. **Storage Operations**: Data is persisted through the storage interface
+7. **Response Handling**: Success/error states are managed and displayed to users
 
 ## External Dependencies
 
@@ -85,6 +97,15 @@ The application follows a modern full-stack architecture with clear separation b
 - **Drizzle ORM**: Type-safe database operations
 - **Zod**: Runtime type validation
 - **@neondatabase/serverless**: PostgreSQL serverless driver
+
+### Email Service
+- **Nodemailer**: SMTP email sending library for transactional emails
+- **SMTP Configuration**: Environment-based SMTP settings for email delivery
+- **Email Features**:
+  - Appointment confirmation emails to customers
+  - Appointment notifications to salon email
+  - Contact inquiry acknowledgements
+  - Branded HTML email templates
 
 ## Deployment Strategy
 

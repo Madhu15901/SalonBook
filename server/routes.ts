@@ -3,6 +3,12 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertAppointmentSchema, insertContactInquirySchema } from "@shared/schema";
 import { z } from "zod";
+import {
+  sendAppointmentConfirmation,
+  sendAppointmentNotificationToSalon,
+  sendContactInquiryConfirmation,
+  sendContactInquiryNotificationToSalon,
+} from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Appointment routes
@@ -10,6 +16,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const appointmentData = insertAppointmentSchema.parse(req.body);
       const appointment = await storage.createAppointment(appointmentData);
+      
+      // Send confirmation emails
+      await sendAppointmentConfirmation(
+        appointment.email,
+        appointment.name,
+        appointment.service,
+        appointment.date,
+        appointment.time,
+        appointment.id
+      );
+      
+      await sendAppointmentNotificationToSalon(
+        appointment.service,
+        appointment.date,
+        appointment.time,
+        appointment.name,
+        appointment.email,
+        appointment.phone,
+        appointment.id
+      );
+      
       res.json(appointment);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -65,6 +92,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const inquiryData = insertContactInquirySchema.parse(req.body);
       const inquiry = await storage.createContactInquiry(inquiryData);
+      
+      // Send confirmation emails
+      await sendContactInquiryConfirmation(inquiry.email, inquiry.name);
+      
+      await sendContactInquiryNotificationToSalon(
+        inquiry.name,
+        inquiry.email,
+        inquiry.phone,
+        inquiry.message,
+        inquiry.serviceInterest
+      );
+      
       res.json(inquiry);
     } catch (error) {
       if (error instanceof z.ZodError) {

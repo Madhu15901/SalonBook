@@ -89,7 +89,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-foreground mb-2">Call Us</h3>
-                  <p className="text-foreground/70">(555) 123-4567</p>
+                  <p className="text-foreground/70">+91 97910 56345</p>
                   <p className="text-sm text-foreground/60">Mon-Sat: 9AM-8PM, Sun: 10AM-6PM</p>
                 </div>
               </div>

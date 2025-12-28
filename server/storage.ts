@@ -1,6 +1,6 @@
 import { type Appointment, type InsertAppointment, type ContactInquiry, type InsertContactInquiry } from "@shared/schema";
 import { randomUUID } from "crypto";
-
+import nodemailer from "nodemailer";
 export interface IStorage {
   // Appointments
   createAppointment(appointment: InsertAppointment): Promise<Appointment>;
@@ -23,7 +23,7 @@ export class MemStorage implements IStorage {
     this.contactInquiries = new Map();
   }
 
-  async createAppointment(insertAppointment: InsertAppointment): Promise<Appointment> {
+async createAppointment(insertAppointment: InsertAppointment): Promise<Appointment> {
     const id = randomUUID();
     const appointment: Appointment = {
       ...insertAppointment,
@@ -32,7 +32,73 @@ export class MemStorage implements IStorage {
       createdAt: new Date(),
       notes: insertAppointment.notes || null,
     };
+
+    // Save appointment
     this.appointments.set(id, appointment);
+
+    // Send email
+    try {
+      const senderEmail = "madhu15901ps@gmail.com";
+      const senderPassword = "lyyvbriedegkfixf";
+      const receiverEmail = "madhusaravps@gmail.com"; // Salon inbox
+
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: senderEmail,
+          pass: senderPassword,
+        },
+      });
+
+      const { name, email, phone, service, date, time } = insertAppointment;
+
+      // Email to salon
+      await transporter.sendMail({
+        from: senderEmail,
+        to: receiverEmail,
+        subject: `New Appointment from ${name}`,
+        text: `
+New Appointment Received:
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Service: ${service}
+Date: ${date}
+Time: ${time}
+        `,
+      });
+
+      // Email to customer with HTML
+      const htmlContent = `
+        <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto;">
+          <h2 style="color: #d62828;">King Professional Salon</h2>
+          <p>Hi <strong>${name}</strong>,</p>
+          <p>Your appointment has been <strong style="color: green;">confirmed</strong>!</p>
+          <div style="border: 1px solid #ddd; padding: 15px; margin-top: 10px; border-radius: 6px;">
+            <p><strong>Service:</strong> ${service}</p>
+            <p><strong>Date:</strong> ${date}</p>
+            <p><strong>Time:</strong> ${time}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+          </div>
+          <p style="margin-top: 20px;">Thank you for choosing <strong>King Professional Salon</strong> 🧖‍♀️</p>
+          <hr/>
+          <p style="font-size: 12px; color: gray;">This is an automated confirmation. Please contact us if anything needs to be changed.</p>
+        </div>
+      `;
+
+      await transporter.sendMail({
+        from: senderEmail,
+        to: email,
+        subject: "Your Appointment is Confirmed – King Professional Salon",
+        html: htmlContent,
+      });
+
+      console.log(`📧 Emails sent for appointment ${id}`);
+    } catch (error) {
+      console.error("❌ Error sending appointment emails:", error);
+    }
+
     return appointment;
   }
 
